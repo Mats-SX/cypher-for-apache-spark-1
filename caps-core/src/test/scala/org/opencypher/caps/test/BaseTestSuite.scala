@@ -22,8 +22,4 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-abstract class BaseTestSuite
-  extends FunSuite
-  with Matchers
-  with AllInstances
-  with AllSyntax
+abstract class BaseTestSuite extends FunSuite with Matchers with AllInstances with AllSyntax
