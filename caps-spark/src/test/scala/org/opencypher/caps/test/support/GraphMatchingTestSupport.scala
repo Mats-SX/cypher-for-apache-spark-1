@@ -216,7 +216,7 @@ trait GraphMatchingTestSupport {
 
 }
 
-case class TestGraph(gdl: String)(implicit caps: CAPSSession) {
+case class TestGraph(gdl: String = "")(implicit caps: CAPSSession) {
 
   outer =>
 

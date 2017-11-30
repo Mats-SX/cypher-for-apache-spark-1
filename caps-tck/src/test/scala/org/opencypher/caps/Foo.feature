@@ -24,74 +24,16 @@ Feature: Comparability
       """
     Then the result should be:
       | 1 |
-      | 2 |
+      | 1 |
     And no side effects
 
-#  Scenario: Comparing strings and integers using > in an AND'd predicate
-#    Given an empty graph
-#    And having executed:
-#      """
-#      CREATE (root:Root)-[:T]->(:Child {id: 0}),
-#             (root)-[:T]->(:Child {id: 'xx'}),
-#             (root)-[:T]->(:Child)
-#      """
-#    When executing query:
-#      """
-#      MATCH (:Root)-->(i:Child)
-#      WHERE exists(i.id) AND i.id > 'x'
-#      RETURN i.id
-#      """
-#    Then the result should be:
-#      | i.id |
-#      | 'xx' |
-#    And no side effects
-#
-#  Scenario: Comparing strings and integers using > in a OR'd predicate
-#    Given an empty graph
-#    And having executed:
-#      """
-#      CREATE (root:Root)-[:T]->(:Child {id: 0}),
-#             (root)-[:T]->(:Child {id: 'xx'}),
-#             (root)-[:T]->(:Child)
-#      """
-#    When executing query:
-#      """
-#      MATCH (:Root)-->(i:Child)
-#      WHERE NOT exists(i.id) OR i.id > 'x'
-#      RETURN i.id
-#      """
-#    Then the result should be:
-#      | i.id |
-#      | 'xx' |
-#      | null |
-#    And no side effects
-#
-#  Scenario Outline: Comparing across types yields null, except numbers
-#    Given an empty graph
-#    And having executed:
-#      """
-#      CREATE ()-[:T]->()
-#      """
-#    When executing query:
-#      """
-#      MATCH p = (n)-[r]->()
-#      WITH [n, r, p, '', 1, 3.14, true, null, [], {}] AS types
-#      UNWIND range(0, size(types) - 1) AS i
-#      UNWIND range(0, size(types) - 1) AS j
-#      WITH types[i] AS lhs, types[j] AS rhs
-#      WHERE i <> j
-#      WITH lhs, rhs, lhs <operator> rhs AS result
-#      WHERE result
-#      RETURN lhs, rhs
-#      """
-#    Then the result should be:
-#      | lhs   | rhs   |
-#      | <lhs> | <rhs> |
-#    And no side effects
-#
-#    Examples:
-#      | operator | lhs  | rhs  |
-#      | <        | 1    | 3.14 |
-#      | <=       | 1    | 3.14 |
-#      | >=       | 3.14 | 1    |
-#      | >        | 3.14 | 1    |
+  Scenario: Fail
+    Given an empty graph
+    When executing query:
+      """
+      RETURN 1
+      """
+    Then the result should be:
+      | 1 |
+      | 1 |
+    And no side effects
